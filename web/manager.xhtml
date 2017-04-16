@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+
+
+    <h:form>
+        <h:outputText value="name : "/>
+        <br/>
+        <h:inputText value="#{client.name}"/>
+        <br/>
+        <h:outputText value="last name : "/>
+        <br/>
+        <h:inputText value="#{client.lName}"/>
+        <br/>
+        <h:outputText value="age : "/>
+        <br/>
+        <h:inputText value="#{client.age}">
+            <f:converter converterId="javax.faces.Integer"/>
+        </h:inputText>
+        <br/>
+        <h:outputText value="adresse : "/>
+        <br/>
+        <h:inputText value="#{client.adresse}">
+            <f:validateRegex pattern="[A-z0-9._%+-]+@[A-z0-9.-]+\.[A-z]{2,4}" />
+        </h:inputText>
+        <br/>
+        <h:outputText value="password : "/>
+        <br/>
+        <h:inputText value="#{client.password}"/>
+        <br/>
+        <h:commandButton action="#{clients.add(client.name,client.lName,client.age,client.password,client.adresse)}" value="addClient"/>
+    </h:form>
+
+    <h:dataTable value = "#{clients.clients}" var = "c">
+
+        <h:column>
+            <f:facet name = "header">Name</f:facet>
+            #{c.name}
+        </h:column>
+
+        <h:column>
+            <f:facet name = "header">last name</f:facet>
+            #{c.lName}
+        </h:column>
+        <h:column>
+            <f:facet name = "header">age</f:facet>
+            #{c.age}
+        </h:column>
+
+        <h:column>
+            <f:facet name = "header">password</f:facet>
+            #{c.password}
+        </h:column>
+
+        <h:column>
+            <f:facet name = "header">adresse</f:facet>
+            #{c.adresse}
+        </h:column>
+    </h:dataTable>
+
+</f:view>
+</html>
